@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanz | The Essence of Luxury</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+
+<body>
+    <div class="loader-wrapper">
+        <div class="loader-content">
+            <img src="logo.png" alt="Kanz Logo" class="loader-logo">
+        </div>
+    </div>
+
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="logo.png" alt="KANZ Logo" id="logo-img"
+                    onerror="this.src='https://placehold.co/150x50/F8F9FA/C5A059?text=KANZ'">
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="background-elements">
+                <div class="blob blob-1"></div>
+                <div class="blob blob-2"></div>
+                <div class="blob blob-3"></div>
+            </div>
+
+            <div class="hero-content">
+                <h2 class="subtitle">Something Extraordinary is Brewing</h2>
+                <h1 class="title">Wait for the <span class="italic">Scent</span> of Perfection</h1>
+                <p class="description">We're meticulously crafting our debut collection. Be the first to experience the
+                    essence of luxury.</p>
+
+                <form id="newsletter-form" class="newsletter-form" action="https://formspree.io/f/mwvwepyb"
+                    method="POST">
+                    <div class="gender-selection">
+                        <label class="gender-chip">
+                            <input type="radio" name="gender" value="male">
+                            <span>Male</span>
+                        </label>
+                        <label class="gender-chip">
+                            <input type="radio" name="gender" value="female">
+                            <span>Female</span>
+                        </label>
+                        <label class="gender-chip">
+                            <input type="radio" name="gender" value="unisex" checked>
+                            <span>Unisex</span>
+                        </label>
+                    </div>
+                    <div class="input-group">
+                        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required
+                            pattern="[0-9]{10,15}">
+                        <button type="submit" id="submit-btn">Reserve Your Sample</button>
+                    </div>
+                    <p class="form-note">Get a free sample when we launch.</p>
+                </form>
+
+                <div id="success-message" class="success-message hidden">
+                    <h3>Thank You!</h3>
+                    <p>We've reserved your exclusive sample. We'll reach out when we're ready.</p>
+                </div>
+            </div>
+
+            <div class="perfume-bottle-container">
+                <img src="bottle.png" alt="Kanz Perfume Bottle" id="perfume-img">
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Kanz Perfumes. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

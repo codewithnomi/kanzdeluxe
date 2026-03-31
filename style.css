@@ -1,0 +1,467 @@
+:root {
+    --primary-color: #C5A059;
+    /* Soft Gold */
+    --secondary-color: #212529;
+    /* Deep Charcoal */
+    --accent-color: #E6C88D;
+    /* Light Gold */
+    --background-color: #F8F9FA;
+    /* Off-White */
+    --text-color: #212529;
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Montserrat', sans-serif;
+    --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+}
+
+/* Loader */
+.loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--background-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loader-logo {
+    width: 250px;
+    /* Even bigger logo on start */
+    height: auto;
+    opacity: 0;
+    /* Maintain sharpness during preloader */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    image-rendering: -webkit-optimize-contrast;
+}
+
+/* Header & Nav */
+header {
+    padding: 1rem 5%;
+    /* Reduced from 2rem to save space */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+}
+
+@media (max-width: 992px) {
+    header {
+        background: rgba(248, 249, 250, 0.9);
+        backdrop-filter: blur(10px);
+        padding: 1.5rem 5%;
+    }
+
+    .logo {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+#logo-img {
+    height: 80px;
+    /* Reduced from 100px to save vertical space */
+    width: auto;
+    max-width: 250px;
+    /* Reduced from 300px */
+    object-fit: contain;
+    transition: var(--transition);
+    display: block;
+    opacity: 0;
+    /* Hidden initially for GSAP */
+    /* Improve image quality and prevent blur during animations */
+    -webkit-font-smoothing: antialiased;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    image-rendering: -webkit-optimize-contrast;
+}
+
+#logo-img:hover {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    display: flex;
+    justify-content: flex-start;
+    /* Back to left align content */
+    align-items: center;
+    position: relative;
+    padding: 120px 5% 40px;
+    overflow: hidden;
+    background: radial-gradient(circle at 75% 50%, rgba(197, 160, 89, 0.05) 0%, rgba(248, 249, 250, 1) 70%);
+    /* Glow on the right */
+}
+
+.background-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.blob {
+    position: absolute;
+    filter: blur(80px);
+    opacity: 0.3;
+    border-radius: 50%;
+}
+
+.blob-1 {
+    width: 40vw;
+    height: 40vw;
+    background: var(--primary-color);
+    top: -10%;
+    left: -10%;
+}
+
+.blob-2 {
+    width: 30vw;
+    height: 30vw;
+    background: var(--accent-color);
+    bottom: -5%;
+    right: -5%;
+}
+
+.blob-3 {
+    width: 20vw;
+    height: 20vw;
+    background: var(--secondary-color);
+    top: 50%;
+    left: 40%;
+}
+
+.hero-content {
+    max-width: 650px;
+    text-align: left;
+    z-index: 10;
+    position: relative;
+}
+
+.perfume-bottle-container {
+    position: absolute;
+    right: 5%;
+    /* Positioned on the right side */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 45vw;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    /* Horizontally centered WITHIN the right container */
+    align-items: center;
+    /* Vertically centered WITHIN the right container */
+    z-index: 1;
+    pointer-events: auto;
+    opacity: 0;
+}
+
+#perfume-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.08));
+    transition: var(--transition);
+    /* Prevent blur during animations and improve sharpness */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    image-rendering: -webkit-optimize-contrast;
+    will-change: transform, opacity;
+}
+
+.subtitle {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    /* Reduced */
+    opacity: 0;
+}
+
+.title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    /* Reduced sizes slightly */
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    /* Reduced */
+    opacity: 0;
+}
+
+.italic {
+    font-style: italic;
+    color: var(--primary-color);
+}
+
+.description {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    opacity: 0;
+}
+
+/* Newsletter Form */
+.newsletter-form {
+    opacity: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Left align form contents */
+}
+
+.gender-selection {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    justify-content: flex-start;
+    /* Left align */
+}
+
+.gender-chip {
+    cursor: pointer;
+}
+
+.gender-chip input {
+    display: none;
+}
+
+.gender-chip span {
+    display: inline-block;
+    padding: 0.6rem 1.5rem;
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #666;
+    transition: var(--transition);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02);
+}
+
+.gender-chip input:checked+span {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    box-shadow: 0 8px 20px rgba(197, 160, 89, 0.2);
+    transform: translateY(-2px);
+}
+
+.gender-chip:hover span {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.gender-chip input:checked:hover span {
+    color: white;
+}
+
+.input-group {
+    display: flex;
+    max-width: 500px;
+    background: white;
+    padding: 0.5rem;
+    border-radius: 50px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+input[type="tel"] {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    border: none;
+    outline: none;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    border-radius: 50px;
+}
+
+button {
+    padding: 1rem 2rem;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+button:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-note {
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 1rem;
+}
+
+/* Success Message */
+.hidden {
+    display: none;
+}
+
+.success-message {
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+.success-message h3 {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+/* Footer */
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #888;
+    padding: 1.5rem 0;
+    z-index: 10;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+
+    html,
+    body {
+        height: auto;
+        overflow: auto;
+        /* Enable scroll on mobile */
+    }
+
+    .hero {
+        flex-direction: column;
+        justify-content: flex-start;
+        text-align: center;
+        padding-top: 150px;
+        padding-bottom: 80px;
+        min-height: 100vh;
+        height: auto;
+    }
+
+    footer {
+        position: relative;
+        padding: 2rem 0;
+    }
+
+    .hero-content {
+        max-width: 100%;
+        text-align: center;
+        margin-bottom: 40px;
+        z-index: 10;
+    }
+
+    .perfume-bottle-container {
+        position: relative;
+        right: 0;
+        top: 0;
+        transform: none !important;
+        width: 100%;
+        height: 40vh;
+        /* Reduced height */
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        pointer-events: auto;
+        /* Enable hover on mobile if needed */
+    }
+
+    #perfume-img {
+        width: 100%;
+        height: 100%;
+        max-width: 250px;
+        /* Reduced max-width */
+        object-fit: contain;
+    }
+
+    .description {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .newsletter-form {
+        align-items: center;
+    }
+
+    .gender-selection {
+        justify-content: center;
+    }
+
+    .input-group {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .input-group {
+        flex-direction: column;
+        background: transparent;
+        box-shadow: none;
+        padding: 0;
+    }
+
+    input[type="tel"] {
+        background: white;
+        margin-bottom: 1rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    button {
+        width: 100%;
+    }
+}
