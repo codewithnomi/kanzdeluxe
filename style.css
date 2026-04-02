@@ -120,14 +120,15 @@ nav {
 .hero {
     height: 100vh;
     display: flex;
-    justify-content: flex-start;
-    /* Back to left align content */
+    justify-content: center;
+    /* Center horizontally */
     align-items: center;
+    /* Center vertically */
     position: relative;
     padding: 120px 5% 40px;
     overflow: hidden;
-    background: radial-gradient(circle at 75% 50%, rgba(197, 160, 89, 0.05) 0%, rgba(248, 249, 250, 1) 70%);
-    /* Glow on the right */
+    background: radial-gradient(circle at 50% 50%, rgba(197, 160, 89, 0.05) 0%, rgba(248, 249, 250, 1) 70%);
+    /* Centered glow */
 }
 
 .background-elements {
@@ -171,28 +172,10 @@ nav {
 }
 
 .hero-content {
-    max-width: 650px;
-    text-align: left;
+    max-width: 800px;
+    text-align: center;
     z-index: 10;
     position: relative;
-}
-
-.perfume-bottle-container {
-    position: absolute;
-    right: 5%;
-    /* Positioned on the right side */
-    top: 50%;
-    transform: translateY(-50%);
-    width: 45vw;
-    height: 80vh;
-    display: flex;
-    justify-content: center;
-    /* Horizontally centered WITHIN the right container */
-    align-items: center;
-    /* Vertically centered WITHIN the right container */
-    z-index: 1;
-    pointer-events: auto;
-    opacity: 0;
 }
 
 #perfume-img {
@@ -240,6 +223,10 @@ nav {
     color: #666;
     margin-bottom: 2rem;
     max-width: 600px;
+    margin-left: auto;
+    /* Centered */
+    margin-right: auto;
+    /* Centered */
     opacity: 0;
 }
 
@@ -249,16 +236,16 @@ nav {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    /* Left align form contents */
+    align-items: center;
+    /* Center form contents */
 }
 
 .gender-selection {
     display: flex;
     gap: 1rem;
     margin-bottom: 1.5rem;
-    justify-content: flex-start;
-    /* Left align */
+    justify-content: center;
+    /* Centered */
 }
 
 .gender-chip {
@@ -342,6 +329,14 @@ button:hover {
     margin-top: 1rem;
 }
 
+.delivery-note {
+    display: block;
+    font-size: 0.7rem;
+    margin-top: 0.3rem;
+    font-style: italic;
+    opacity: 0.8;
+}
+
 /* Success Message */
 .hidden {
     display: none;
@@ -401,31 +396,6 @@ footer {
         text-align: center;
         margin-bottom: 40px;
         z-index: 10;
-    }
-
-    .perfume-bottle-container {
-        position: relative;
-        right: 0;
-        top: 0;
-        transform: none !important;
-        width: 100%;
-        height: 40vh;
-        /* Reduced height */
-        margin-top: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        opacity: 0;
-        pointer-events: auto;
-        /* Enable hover on mobile if needed */
-    }
-
-    #perfume-img {
-        width: 100%;
-        height: 100%;
-        max-width: 250px;
-        /* Reduced max-width */
-        object-fit: contain;
     }
 
     .description {

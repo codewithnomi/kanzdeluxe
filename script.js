@@ -63,14 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
             duration: 1,
             ease: "power3.out",
             force3D: true
-        }, "-=0.6")
-        .to('.perfume-bottle-container', {
-            opacity: 1,
-            x: window.innerWidth > 992 ? -30 : 0, // Slight slide-in from right on desktop
-            duration: 1.5,
-            ease: "power3.out",
-            force3D: true
-        }, "-=1");
+        }, "-=0.6");
 
     // 3. Floating Background Blobs Animation
     gsap.to('.blob-1', {
@@ -100,17 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ease: "sine.inOut"
     });
 
-    // 4. Floating Perfume Bottle Animation
-    gsap.to('#perfume-img', {
-        y: '-20px',
-        duration: 3,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        force3D: true
-    });
-
-    // 5. Form Handling & "Storage" Simulation
+    // 4. Form Handling & "Storage" Simulation
     const form = document.getElementById('newsletter-form');
     const successMessage = document.getElementById('success-message');
     const submitBtn = document.getElementById('submit-btn');
