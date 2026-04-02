@@ -288,14 +288,15 @@ nav {
 
 .input-group {
     display: flex;
-    max-width: 500px;
+    max-width: 600px;
     background: white;
     padding: 0.5rem;
     border-radius: 50px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
-input[type="tel"] {
+input[type="tel"],
+input[type="text"] {
     flex: 1;
     padding: 1rem 1.5rem;
     border: none;
@@ -303,6 +304,12 @@ input[type="tel"] {
     font-family: var(--font-sans);
     font-size: 1rem;
     border-radius: 50px;
+    width: 100%;
+}
+
+input[type="text"] {
+    border-left: 1px solid #eee;
+    border-radius: 0;
 }
 
 button {
@@ -423,12 +430,16 @@ footer {
         background: transparent;
         box-shadow: none;
         padding: 0;
+        gap: 1rem;
     }
 
-    input[type="tel"] {
+    input[type="tel"],
+    input[type="text"] {
         background: white;
-        margin-bottom: 1rem;
+        margin-bottom: 0;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        border-radius: 50px;
+        border-left: none;
     }
 
     button {

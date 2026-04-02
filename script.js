@@ -106,7 +106,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
             if (timezone && timezone.includes('/')) {
                 const cityFromTZ = timezone.split('/')[1].replace('_', ' ');
-                cityInput.value = cityFromTZ;
+                // Only pre-fill if it's currently empty
+                if (!cityInput.value || cityInput.value === "Unknown") {
+                    cityInput.value = cityFromTZ;
+                }
                 console.log(`[Kanz CRM] Location estimated from Timezone: ${cityFromTZ}`);
             }
         } catch (e) { console.error("TZ check failed", e); }
@@ -124,13 +127,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!response.ok) continue;
 
                 const data = await response.json();
-                // Handle different response structures (ipwho.is uses .city, others use .city or .cityName)
                 const city = data.city || data.cityName;
 
                 if (city && city !== "Unknown" && city !== "undefined") {
+                    // Pre-fill and let user know it's detected
                     cityInput.value = city;
                     console.log(`[Kanz CRM] Precise location detected via ${url}: ${city}`);
-                    return; // Stop if we found a precise city
+                    return;
                 }
             } catch (error) {
                 console.warn(`Location service ${url} failed or was blocked, trying next...`);

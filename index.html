@@ -47,7 +47,6 @@
 
                 <form id="newsletter-form" class="newsletter-form" action="https://formspree.io/f/mwvwepyb"
                     method="POST">
-                    <input type="hidden" name="city" id="user-city" value="Unknown">
                     <div class="gender-selection">
                         <label class="gender-chip">
                             <input type="radio" name="gender" value="male">
@@ -63,8 +62,9 @@
                         </label>
                     </div>
                     <div class="input-group">
-                        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required
+                        <input type="tel" id="phone" name="phone" placeholder="Phone Number" required
                             pattern="[0-9]{10,15}">
+                        <input type="text" id="user-city" name="city" placeholder="City" required>
                         <button type="submit" id="submit-btn">Reserve Your Sample</button>
                     </div>
                     <p class="form-note">Get a free sample when we launch. <span class="delivery-note">*Delivery charges
