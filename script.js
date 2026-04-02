@@ -101,8 +101,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fetch user city based on IP
     async function fetchCity() {
-        // Try multiple services for better reliability
+        // 1. Ultimate Fallback: Use Browser Timezone (Never fails)
+        try {
+            const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            if (timezone && timezone.includes('/')) {
+                const cityFromTZ = timezone.split('/')[1].replace('_', ' ');
+                cityInput.value = cityFromTZ;
+                console.log(`[Kanz CRM] Location estimated from Timezone: ${cityFromTZ}`);
+            }
+        } catch (e) { console.error("TZ check failed", e); }
+
+        // 2. Try high-reliability IP services to get the exact city
         const services = [
+            'https://ipwho.is/',
             'https://ipapi.co/json/',
             'https://freeipapi.com/api/json'
         ];
@@ -113,19 +124,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!response.ok) continue;
 
                 const data = await response.json();
-                // Handle different response structures
+                // Handle different response structures (ipwho.is uses .city, others use .city or .cityName)
                 const city = data.city || data.cityName;
 
-                if (city && city !== "Unknown") {
+                if (city && city !== "Unknown" && city !== "undefined") {
                     cityInput.value = city;
-                    console.log(`[Kanz CRM] User location detected via ${url}: ${city}`);
-                    return; // Stop if we found a city
+                    console.log(`[Kanz CRM] Precise location detected via ${url}: ${city}`);
+                    return; // Stop if we found a precise city
                 }
             } catch (error) {
-                console.warn(`Location service ${url} failed, trying next...`);
+                console.warn(`Location service ${url} failed or was blocked, trying next...`);
             }
         }
-        console.log("[Kanz CRM] Could not detect city, defaulting to Unknown.");
     }
     fetchCity();
 
