@@ -97,6 +97,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('newsletter-form');
     const successMessage = document.getElementById('success-message');
     const submitBtn = document.getElementById('submit-btn');
+    const cityInput = document.getElementById('user-city');
+
+    // Fetch user city based on IP
+    async function fetchCity() {
+        // Try multiple services for better reliability
+        const services = [
+            'https://ipapi.co/json/',
+            'https://freeipapi.com/api/json'
+        ];
+
+        for (const url of services) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) continue;
+
+                const data = await response.json();
+                // Handle different response structures
+                const city = data.city || data.cityName;
+
+                if (city && city !== "Unknown") {
+                    cityInput.value = city;
+                    console.log(`[Kanz CRM] User location detected via ${url}: ${city}`);
+                    return; // Stop if we found a city
+                }
+            } catch (error) {
+                console.warn(`Location service ${url} failed, trying next...`);
+            }
+        }
+        console.log("[Kanz CRM] Could not detect city, defaulting to Unknown.");
+    }
+    fetchCity();
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
