@@ -96,51 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Form Handling & "Storage" Simulation
     const form = document.getElementById('newsletter-form');
     const successMessage = document.getElementById('success-message');
-    const submitBtn = document.getElementById('submit-btn');
-    const cityInput = document.getElementById('user-city');
-
-    // Fetch user city based on IP
-    async function fetchCity() {
-        // 1. Ultimate Fallback: Use Browser Timezone (Never fails)
-        try {
-            const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-            if (timezone && timezone.includes('/')) {
-                const cityFromTZ = timezone.split('/')[1].replace('_', ' ');
-                // Only pre-fill if it's currently empty
-                if (!cityInput.value || cityInput.value === "Unknown") {
-                    cityInput.value = cityFromTZ;
-                }
-                console.log(`[Kanz CRM] Location estimated from Timezone: ${cityFromTZ}`);
-            }
-        } catch (e) { console.error("TZ check failed", e); }
-
-        // 2. Try high-reliability IP services to get the exact city
-        const services = [
-            'https://ipwho.is/',
-            'https://ipapi.co/json/',
-            'https://freeipapi.com/api/json'
-        ];
-
-        for (const url of services) {
-            try {
-                const response = await fetch(url);
-                if (!response.ok) continue;
-
-                const data = await response.json();
-                const city = data.city || data.cityName;
-
-                if (city && city !== "Unknown" && city !== "undefined") {
-                    // Pre-fill and let user know it's detected
-                    cityInput.value = city;
-                    console.log(`[Kanz CRM] Precise location detected via ${url}: ${city}`);
-                    return;
-                }
-            } catch (error) {
-                console.warn(`Location service ${url} failed or was blocked, trying next...`);
-            }
-        }
-    }
-    fetchCity();
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
